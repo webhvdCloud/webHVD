@@ -1,0 +1,52 @@
+function replace_strings(ms, find, replace, lenS)
+{
+var count=0;
+var x=0;
+var flen = find.length;
+
+var prs=""; /*previous replaced string*/
+do
+{
+	if(x==0)
+		x=ms.indexOf(find, x);
+	else
+		x=ms.indexOf(find, x+flen);
+	if(x>0)
+	{
+		//finding complete username string like this
+		//username="rdJLswmqBEKDDdZX"
+		var uncomp=ms.substring(x, x+flen+lenS+2); //2 for two qoutation
+		if(uncomp==""+find+""+replace)
+		{
+			console.log('this username has already been replaced');
+		}
+		else
+		{
+			ms = replaceAll(uncomp, ""+find+""+replace, ms);
+			prs = uncomp;
+			console.log("ms: " + ms);
+		}
+	}
+	count++;
+}
+while (x > 0)
+console.log("username found " + count + " times" );
+return ms;
+}
+
+function replace_username()
+{
+var find = 'username=';
+var replace='"aaaaaaaaaaaaaaaa"';
+var unlen=16;
+
+	ms = replace_strings(ms, find, replace, unlen);
+}
+function replace_password()
+{
+var find = 'password=';
+var replace='"bbbbbbbbbbbbbbbbbbbbbbbb"';
+var pwdlen=24;
+
+	ms = replace_strings(ms, find, replace, pwdlen);
+}

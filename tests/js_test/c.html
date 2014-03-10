@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+var iq='<cli:iq type="get" id="200" xmlns:cli="jabber:client"><query xmlns="google:jingleinfo"/></cli:iq>';
+
+function replaceAll(find, replace, str) {
+  return str.replace(new RegExp(find, 'g'), replace);
+}
+
+
+function myFunction()
+{
+alert('a');
+//document.body.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+//document.body.webkitRequestFullScreen();
+ javascript:document.querySelector('body').webkitRequestFullScreen();
+alert('b');
+}
+</script>
+</head>
+<body onload="myFunction()">
+
+<p>Click the button to trigger a function.</p>
+
+<button onclick="myFunction()">Click me</button>
+
+<p id="demo"></p>
+
+</body>
+</html>

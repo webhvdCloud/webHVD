@@ -1,0 +1,18 @@
+<iq xmlns="jabber:client" from="akhaliq_dincloud.com@dincloud.com/ed386cb4-0d22-3265-efe1-437de277f897" to="akhaliq_dincloud.com@dincloud.com/42796289201384323057922144" xml:lang="*" xmlns:xml="http://www.w3.org/XML/1998/namespace" type="set" id="26">
+    <jingle xmlns="urn:xmpp:jingle:1" sid="8910339495942545834" action="session-accept">
+        <content name="chromoting" creator="initiator">
+            <description xmlns="google:remoting">
+                <control transport="mux-stream" version="2" />
+                <event transport="mux-stream" version="2" />
+                <video transport="stream" version="2" codec="vp8" />
+                <audio transport="mux-stream" version="2" codec="opus" />
+                <initial-resolution width="640" height="480" />
+                <authentication method="spake2_hmac">
+                    <eke-message>wiSu9QABiyAPl+h5wRDHJMcofS9lMG5HvGaK7kM3OMKpTcNgYZy1s4Z6h+Jx4LqHKiE7IpbNbfM=</eke-message>
+                    <certificate>MIICsjCCAZqgAwIBAgIQHIfp1i/RZL5E5iPuSy6UDzANBgkqhkiG9w0BAQUFADAVMRMwEQYDVQQDEwpjaHJvbW90aW5nMB4XDTEzMTExMzA2MDQwNFoXDTEzMTExNDA2MDQwNFowFTETMBEGA1UEAxMKY2hyb21vdGluZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMJSxUCAIRiRGT4zdGVxej9++qgusBcrZZKZmTTA8zUGGRgKgnRnb9Hktp+ONGEyXLloOQ4OzHDmxS9L3JQwQYYjtIv1RBVuSyDq8e+NRXq4+aI4boKNtRKUcnlp4U4DhiGKePBudv1LcKBvb5RwJN4RUqxhueYrswEG06UF5KRXtbvMrMdrWFlykYcomMcOM0Z6/KxdOOwjg5tXFjJbUPnx3JhdnNVNad+MDgXkTsKJ2k8dHlw6kRAS/wuFaOfbxk+gcU3x5x1QuNiyO+psW3ULKSe/8+BprVuaBH6+1I50EqdfSjdurt/yIgSwtfPG+8v7YqcoWni7I4DQ5XtzzYUCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEAXN+oUqeHUMISWBEAf8I57/HMDuviD9E5j+dv85jtjPYpK+HCkHX2KZ0Ad+p4LkzN/Hn4jZIzLOmTY7vhFVbkwd5yl7auUogN8XxB12OooLVdyCGsyrVYJalSB0Z+lEitnlRhugMjqq4JJD5lq0YoD04aiDGJsCJOD/cACPm6OZTDmfC9YvSJE1aG21WYCM1Ge3JVBAGWeUFGA8M1SwybUGmxoY6Nozg/R1Atrx1sp4ctdjs3hMuSB5dwKJ3c1AicARTkc7P3xC0S6ITjbecbbeSAl4/mKIRm5ewEW12dhH8WHtz8ocbSadXaTyTQXOzjp0U//7gv4jA/DdL+sJumFw==</certificate>
+                </authentication>
+            </description>
+            <transport xmlns="http://www.google.com/transport/p2p" />
+        </content>
+    </jingle>
+</iq>

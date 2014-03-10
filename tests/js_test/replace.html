@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+//var iq='<cli:iq type="get" id="200" xmlns:cli="jabber:client"><query xmlns="google:jingleinfo"/></cli:iq>';
+var iq = '<iq xmlns="jabber:client" from="akhaliq_dincloud.com@dincloud.com/ed386cb4-0d22-3265-efe1-437de277f897" to="akhaliq_dincloud.com@dincloud.com/42796289201384323057922144" xml:lang="*" xmlns:xml="http://www.w3.org/XML/1998/namespace" type="set" id="26"><jingle xmlns="urn:xmpp:jingle:1" sid="8910339495942545834" action="session-accept"><content name="chromoting" creator="initiator"><description xmlns="google:remoting"><control transport="mux-stream" version="2"/><event transport="mux-stream" version="2"/><video transport="stream" version="2" codec="vp8"/><audio transport="mux-stream" version="2" codec="opus"/><initial-resolution width="640" height="480"/><authentication method="spake2_hmac"><eke-message>wiSu9QABiyAPl+h5wRDHJMcofS9lMG5HvGaK7kM3OMKpTcNgYZy1s4Z6h+Jx4LqHKiE7IpbNbfM=</eke-message><certificate>MIICsjCCAZqgAwIBAgIQHIfp1i/RZL5E5iPuSy6UDzANBgkqhkiG9w0BAQUFADAVMRMwEQYDVQQDEwpjaHJvbW90aW5nMB4XDTEzMTExMzA2MDQwNFoXDTEzMTExNDA2MDQwNFowFTETMBEGA1UEAxMKY2hyb21vdGluZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMJSxUCAIRiRGT4zdGVxej9++qgusBcrZZKZmTTA8zUGGRgKgnRnb9Hktp+ONGEyXLloOQ4OzHDmxS9L3JQwQYYjtIv1RBVuSyDq8e+NRXq4+aI4boKNtRKUcnlp4U4DhiGKePBudv1LcKBvb5RwJN4RUqxhueYrswEG06UF5KRXtbvMrMdrWFlykYcomMcOM0Z6/KxdOOwjg5tXFjJbUPnx3JhdnNVNad+MDgXkTsKJ2k8dHlw6kRAS/wuFaOfbxk+gcU3x5x1QuNiyO+psW3ULKSe/8+BprVuaBH6+1I50EqdfSjdurt/yIgSwtfPG+8v7YqcoWni7I4DQ5XtzzYUCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEAXN+oUqeHUMISWBEAf8I57/HMDuviD9E5j+dv85jtjPYpK+HCkHX2KZ0Ad+p4LkzN/Hn4jZIzLOmTY7vhFVbkwd5yl7auUogN8XxB12OooLVdyCGsyrVYJalSB0Z+lEitnlRhugMjqq4JJD5lq0YoD04aiDGJsCJOD/cACPm6OZTDmfC9YvSJE1aG21WYCM1Ge3JVBAGWeUFGA8M1SwybUGmxoY6Nozg/R1Atrx1sp4ctdjs3hMuSB5dwKJ3c1AicARTkc7P3xC0S6ITjbecbbeSAl4/mKIRm5ewEW12dhH8WHtz8ocbSadXaTyTQXOzjp0U//7gv4jA/DdL+sJumFw==</certificate></authentication></description><transport xmlns="http://www.google.com/transport/p2p"/></content></jingle></iq>';
+var XmlDoc = null;
+function replaceAll(find, replace, str) {
+	var newStr = str.replace(new RegExp(find, 'g'), replace);
+	if(newStr == str)
+	{
+		console.log('---------- not replaced');
+	}
+  return newStr;
+}
+
+function strToXMLElement(packet)
+{
+	var XmlEle = null;
+	if (XmlDoc === null)
+	{
+		XmlDoc = new DOMParser();
+	}
+	XmlEle = XmlDoc.parseFromString(packet, "text/xml");	
+	return XmlEle.documentElement;
+}
+
+
+function myFunction()
+{
+alert(iq);
+//iq = iq.replace('cli:', '');
+iq = replaceAll('cli:', '', iq);
+alert(iq);
+ //document.getElementById("demo").innerHTML=iq;
+}
+var ssid=null;
+function extractInfo()
+{
+alert(screen.width);
+alert(screen.height);
+	var stnza = strToXMLElement(iq);
+	if(stnza != null)
+	{
+		var jngle0 = stnza.getElementsByTagName("jingle")[0];
+		if(jngle0 !=null)
+			sid = jngle0.getAttribute('sid');
+	}
+	console.log('sid: ' + sid);
+	
+var session_accept_pkt_id=null;
+var session_accept_sid=null;
+current_display_x_res=1440;
+current_display_y_res=900;
+
+var custom_jingle_pkt='<iq xmlns="jabber:client" to="akhaliq_dincloud.com@dincloud.com/ed386cb4-0d22-3265-efe1-437de277f897" type="set"> \
+  <jingle xmlns="urn:xmpp:jingle:1" sid="'+sid+'" action="session-info"> \
+    <resolution width="'+ current_display_x_res +'" height="'+ current_display_y_res +'" /> \
+  </jingle> \
+</iq>';	
+console.log(custom_jingle_pkt);
+}
+
+function replace_strings(iq)
+{
+//<token>CAESGQoQd2ViaHZkQGdtYWlsLmNvbRD+3rqOwygaEF4OJ5q65goQ3/+IhLqax4g=//<//token>
+iq='<iq to="WebHVD@gmail.com/chromotingBC6AE04B" id="3"\ type="result"><query xmlns="google:jingleinfo"><stun><server host="stun.l.google.com" udp="19302"/><server host="alt4.stun.l.google.com" udp="19302"/><server host="alt2.stun.l.google.com" udp="19302"/><server host="alt3.stun.l.google.com" udp="19302"/><server host="alt1.stun.l.google.com" udp="19302"/></stun><relay><token>CAESGQoQd2ViaHZkQGdtYWlsLmNvbRC05uiPwygaEGo0q2uxozdnDlQUZhEtBY8=</token><server host="relay.google.com" udp="19305" tcp="19305" tcpssl="443"/></relay></query></iq>';
+//370
+alert(typeof(iq));
+x=iq.indexOf("google:jingleinfo");
+y=iq.indexOf("alt4.stun.l.google.com");
+console.log(x);
+console.log(y);
+if(x>0 && y>0)
+{
+	console.log('both x and y are greter than zero');
+}
+s=iq.indexOf('<token>', 0);
+e=iq.indexOf('</token>', 0);
+l=iq.length;
+console.log(s);
+console.log(e);
+console.log(l);
+
+st1=iq.substring(0,s+"<token>".length);
+st2=iq.substring(e,l);
+
+console.log(st1);
+console.log(st2);
+//CAESGQoQd2ViaHZkQGdtYWlsLmNvbRC05uiPwygaEGo0q2uxozdnDlQUZhEtBY8=
+token = 'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB';
+st3=st1+token+st2;
+console.log(st3);
+console.log(iq);
+
+}
+var ms='<iq to="WebHVD@gmail.com/chromotingBC6AE04B" id="3"\ type="result"><query xmlns="google:jingleinfo"><stun><server host="stun.l.google.com" udp="19302"/><server host="alt4.stun.l.google.com" udp="19302"/><server host="alt2.stun.l.google.com" udp="19302"/><server host="alt3.stun.l.google.com" udp="19302"/><server host="alt1.stun.l.google.com" udp="19302"/></stun><relay><token>CAESGQoQd2ViaHZkQGdtYWlsLmNvbRC05uiPwygaEGo0q2uxozdnDlQUZhEtBY8=</token><server host="relay.google.com" udp="19305" tcp="19305" tcpssl="443"/></relay></query></iq>';
+
+ms='<iq xmlns="jabber:client" to="akhaliq_dincloud.com@dincloud.com/e51970c1-274f-bd25-94f2-fc38b6193b18" type="set" id="4">\
+    <jingle xmlns="urn:xmpp:jingle:1" sid="7151328229403220208" action="transport-info">\
+        <content name="chromoting" creator="initiator">\
+            <transport xmlns="http://www.google.com/transport/p2p">\
+                <candidate name="mux" address="192.168.0.100" port="61881" type="local" protocol="udp" username="rdJLswmqBEKDDdZX" password="WNFvnVqOlAA6o5Iai2HXbp6y" preference=".9900000095367432" generation="0" />\
+                <candidate name="mux" address="192.168.42.1" port="61882" type="local" protocol="udp" username="rdJLswmqBEKDDdZX" password="WNFvnVqOlAA6o5Iai2HXbp6y" preference=".9900000095367432" generation="0" />\
+                <candidate name="mux" address="192.168.61.1" port="61883" type="local" protocol="udp" username="rdJLswmqBEKDDdZX" password="WNFvnVqOlAA6o5Iai2HXbp6y" preference=".9900000095367432" generation="0" />\
+                <candidate name="mux" address="fe80::2459:91d0:c0a4:be85" port="61884" type="local" protocol="udp" username="rdJLswmqBEKDDdZX" password="WNFvnVqOlAA6o5Iai2HXbp6y" preference=".9900000095367432" generation="0" />\
+                <candidate name="mux" address="fe80::d437:d66a:a9c0:9fa8" port="61885" type="local" protocol="udp" username="rdJLswmqBEKDDdZX" password="WNFvnVqOlAA6o5Iai2HXbp6y" preference=".9900000095367432" generation="0" />\
+                <candidate name="mux" address="fe80::e1ec:c3b6:7b29:f331" port="61886" type="local" protocol="udp" username="rdJLswmqBEKDDdZX" password="WNFvnVqOlAA6o5Iai2HXbp6y" preference=".9900000095367432" generation="0" />\
+                <candidate name="video" address="192.168.0.100" port="61887" type="local" protocol="udp" username="3XM/9Ye00r6GnVnI" password="kUYbBfTnL4c/047U0wLzHqV7" preference=".9900000095367432" generation="0" />\
+                <candidate name="video" address="192.168.42.1" port="61888" type="local" protocol="udp" username="3XM/9Ye00r6GnVnI" password="kUYbBfTnL4c/047U0wLzHqV7" preference=".9900000095367432" generation="0" />\
+                <candidate name="video" address="192.168.61.1" port="61889" type="local" protocol="udp" username="3XM/9Ye00r6GnVnI" password="kUYbBfTnL4c/047U0wLzHqV7" preference=".9900000095367432" generation="0" />\
+                <candidate name="video" address="fe80::2459:91d0:c0a4:be85" port="61890" type="local" protocol="udp" username="3XM/9Ye00r6GnVnI" password="kUYbBfTnL4c/047U0wLzHqV7" preference=".9900000095367432" generation="0" />\
+                <candidate name="video" address="fe80::d437:d66a:a9c0:9fa8" port="61891" type="local" protocol="udp" username="3XM/9Ye00r6GnVnI" password="kUYbBfTnL4c/047U0wLzHqV7" preference=".9900000095367432" generation="0" />\
+            </transport>\
+        </content>\
+    </jingle>\
+</iq>';
+
+ms='<iq xmlns="jabber:client" to="akhaliq_dincloud.com@dincloud.com/e51970c1-274f-bd25-94f2-fc38b6193b18" type="set" id="4">\
+    <jingle xmlns="urn:xmpp:jingle:1" sid="7151328229403220208" action="transport-info">\
+        <content name="chromoting" creator="initiator">\
+            <transport xmlns="http://www.google.com/transport/p2p">\
+                <candidate name="mux" address="192.168.0.100" port="61881" type="local" protocol="udp" username="rdJLswmqBEKDDdZX" password="WNFvnVqOlAA6o5Iai2HXbp6y" preference=".9900000095367432" generation="0" />\
+                <candidate name="mux" address="192.168.42.1" port="61882" type="local" protocol="udp" username="rdJLswmqBEKDDdZX" password="WNFvnVqOlAA6o5Iai2HXbp6y" preference=".9900000095367432" generation="0" />\
+                <candidate name="mux" address="192.168.61.1" port="61883" type="local" protocol="udp" username="rdJLswmqBEKDDdZX" password="WNFvnVqOlAA6o5Iai2HXbp6y" preference=".9900000095367432" generation="0" />\
+                <candidate name="mux" address="fe80::2459:91d0:c0a4:be85" port="61884" type="local" protocol="udp" username="rdJLswmqBEKDDdZX" password="WNFvnVqOlAA6o5Iai2HXbp6y" preference=".9900000095367432" generation="0" />\
+                <candidate name="mux" address="fe80::d437:d66a:a9c0:9fa8" port="61885" type="local" protocol="udp" username="rdJLswmqBEKDDdZX" password="WNFvnVqOlAA6o5Iai2HXbp6y" preference=".9900000095367432" generation="0" />\
+                <candidate name="mux" address="fe80::e1ec:c3b6:7b29:f331" port="61886" type="local" protocol="udp" username="rdJLswmqBEKDDdZX" password="WNFvnVqOlAA6o5Iai2HXbp6y" preference=".9900000095367432" generation="0" />\
+                <candidate name="video" address="192.168.0.100" port="61887" type="local" protocol="udp" username="3XM/9Ye00r6GnVnI" password="kUYbBfTnL4c/047U0wLzHqV7" preference=".9900000095367432" generation="0" />\
+                <candidate name="video" address="192.168.42.1" port="61888" type="local" protocol="udp" username="3XM/9Ye00r6GnVnI" password="kUYbBfTnL4c/047U0wLzHqV7" preference=".9900000095367432" generation="0" />\
+                <candidate name="video" address="192.168.61.1" port="61889" type="local" protocol="udp" username="3XM/9Ye00r6GnVnI" password="kUYbBfTnL4c/047U0wLzHqV7" preference=".9900000095367432" generation="0" />\
+                <candidate name="video" address="fe80::2459:91d0:c0a4:be85" port="61890" type="local" protocol="udp" username="3XM/9Ye00r6GnVnI" password="kUYbBfTnL4c/047U0wLzHqV7" preference=".9900000095367432" generation="0" />\
+                <candidate name="video" address="fe80::d437:d66a:a9c0:9fa8" port="61891" type="local" protocol="udp" username="3XM/9Ye00r6GnVnI" password="kUYbBfTnL4c/047U0wLzHqV7" preference=".9900000095367432" generation="0" />\
+            </transport>\
+        </content>\
+    </jingle>\
+</iq>';
+//aZf57UaU9r1zx+sKmjCVSoRW
+//aZf57UaU9r1zxxsKmjCVSoRW
+ms = '<iq xmlns="jabber:client" to="akhaliq_dincloud.com@dincloud.com/e51970c1-274f-bd25-94f2-fc38b6193b18" type="set" id="x4"><jingle xmlns="urn:xmpp:jingle:1" sid="5151799025018952161" action="transport-info"><content name="chromoting" creator="initiator"><transport xmlns="http://www.google.com/transport/p2p"><candidate name="mux" address="172.25.99.26" port="65445" type="local" protocol="udp" username="aaaaaaaaaaaaaaaa" password="aZf57UaU9r1zx+sKmjCVSoRW" preference=".9900000095367432" generation="0"/><candidate name="mux" address="192.168.42.1" port="65446" type="local" protocol="udp" username="aaaaaaaaaaaaaaaa" password="aZf57UaU9r1zx+sKmjCVSoRW" preference=".9900000095367432" generation="0"/><candidate name="mux" address="192.168.61.1" port="65447" type="local" protocol="udp" username="aaaaaaaaaaaaaaaa" password="aZf57UaU9r1zx+sKmjCVSoRW" preference=".9900000095367432" generation="0"/><candidate name="mux" address="fe80::2459:91d0:c0a4:be85" port="65448" type="local" protocol="udp" username="aaaaaaaaaaaaaaaa" password="aZf57UaU9r1zx+sKmjCVSoRW" preference=".9900000095367432" generation="0"/><candidate name="mux" address="fe80::d437:d66a:a9c0:9fa8" port="65449" type="local" protocol="udp" username="aaaaaaaaaaaaaaaa" password="aZf57UaU9r1zx+sKmjCVSoRW" preference=".9900000095367432" generation="0"/><candidate name="mux" address="fe80::e1ec:c3b6:7b29:f331" port="65450" type="local" protocol="udp" username="aaaaaaaaaaaaaaaa" password="aZf57UaU9r1zx+sKmjCVSoRW" preference=".9900000095367432" generation="0"/><candidate name="video" address="172.25.99.26" port="65451" type="local" protocol="udp" username="aaaaaaaaaaaaaaaa" password="kbI494HfWFNFqGaZ+wqE5OuJ" preference=".9900000095367432" generation="0"/><candidate name="video" address="192.168.42.1" port="65452" type="local" protocol="udp" username="aaaaaaaaaaaaaaaa" password="kbI494HfWFNFqGaZ+wqE5OuJ" preference=".9900000095367432" generation="0"/><candidate name="video" address="192.168.61.1" port="65453" type="local" protocol="udp" username="aaaaaaaaaaaaaaaa" password="kbI494HfWFNFqGaZ+wqE5OuJ" preference=".9900000095367432" generation="0"/></transport></content></jingle></iq>';
+
+function replace_strings(ms, find, replace, lenS)
+{
+var count=0;
+var x=0;
+var flen = find.length;
+
+var prs=""; /*previous replaced string*/
+do
+{
+	if(x==0)
+		x=ms.indexOf(find, x);
+	else
+		x=ms.indexOf(find, x+flen);
+	if(x>0)
+	{
+		//finding complete username string like this
+		//username="rdJLswmqBEKDDdZX"
+		var uncomp=ms.substring(x, x+flen+lenS+2); //2 for two qoutation
+		if(uncomp==""+find+""+replace)
+		{
+			console.log('this username has already been replaced');
+		}
+		else
+		{
+			ms = replaceAll(uncomp, ""+find+""+replace, ms);
+			prs = uncomp;
+			console.log("ms: " + ms);
+		}
+	}
+	count++;
+}
+while (x > 0)
+console.log("username found " + count + " times" );
+return ms;
+}
+
+function replace_username()
+{
+var find = 'username=';
+var replace='"aaaaaaaaaaaaaaaa"';
+var unlen=16;
+
+	ms = replace_strings(ms, find, replace, unlen);
+}
+function replace_password()
+{
+var find = 'password=';
+var replace='"bbbbbbbbbbbbbbbbbbbbbbbb"';
+var pwdlen=24;
+
+	ms = replace_strings(ms, find, replace, pwdlen);
+}
+
+
+</script>
+</head>
+<body>
+
+<p>Click the button to trigger a function.</p>
+
+<button onclick="replace_username()">Click me</button>
+<button onclick="replace_password()">Click me</button>
+
+<p id="demo"></p>
+
+</body>
+</html>
